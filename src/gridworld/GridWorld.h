@@ -200,6 +200,7 @@ public:
         return dead;
     }
 
+    // 实施攻击
     void be_attack(float damage) {
         hp -= damage;
         if (hp < 0.0) {

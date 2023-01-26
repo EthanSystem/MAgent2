@@ -92,7 +92,7 @@ class Renderer:
         self.mode = mode
         self.handles = self.env.get_handles()
         base_resolution = (map_size * 8, map_size * 8 + 15)
-        if mode == "human":
+        if mode == "human":  # 可视化模式
             pygame.init()
             pygame.display.init()
             infoObject = pygame.display.Info()

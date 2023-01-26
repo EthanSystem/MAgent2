@@ -15,8 +15,8 @@
 namespace magent {
 namespace gridworld {
 
-typedef enum {BLANK, OBSTACLE} SlotType;
-typedef enum {OCC_AGENT, OCC_FOOD} OccupyType;
+typedef enum {BLANK, OBSTACLE} SlotType;  // 空地、障碍物
+typedef enum {OCC_AGENT, OCC_FOOD} OccupyType; // 个体、食物
 
 typedef float Food;
 
@@ -69,7 +69,7 @@ public:
     void get_wall(std::vector<Position> &walls) const;
 
 private:
-    MapSlot* slots;
+    MapSlot* slots; // 地图格位
     int *channel_ids;  // channel_id is supposed to be a member of MapSlot, extract it out from MapSlot for faster access of memory
     int w, h;
     const int wall_channel_id, food_channel_id;
