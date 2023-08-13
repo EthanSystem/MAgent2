@@ -7,27 +7,13 @@ import setuptools
 from setuptools import Extension
 from setuptools.command.build_ext import build_ext
 
+
 ###
 # Build process:
 # cmake .
 # make -j threads
 # move libmagent -> build/
 ###
-
-
-def get_description():
-    """Gets the description from the readme."""
-    with open("README.md") as fh:
-        long_description = ""
-        header_count = 0
-        for line in fh:
-            if line.startswith("##"):
-                header_count += 1
-            if header_count < 2:
-                long_description += line
-            else:
-                break
-    return header_count, long_description
 
 
 def get_version():
@@ -126,35 +112,10 @@ class CMakeBuild(build_ext):
             # )
 
 
-version = get_version()
-header_count, long_description = get_description()
-
 setuptools.setup(
     name="magent2",
-    version=version,
-    author="Farama Foundation",
-    author_email="contact@farama.org",
-    description="Multi-Agent Reinforcement Learning environments with very large numbers of agents",
-    url="https://github.com/Farama-Foundation/MAgent",
-    license="MIT",
-    license_files=("LICENSE",),
-    long_description=long_description,
-    long_description_content_type="text/markdown",
-    keywords=["Reinforcement Learning", "game", "RL", "AI"],
-    python_requires=">=3.7",
+    version=get_version(),
     packages=setuptools.find_packages(),
     ext_modules=[CMakeExtension("magent2.libmagent", ".", [])],
-    install_requires=["numpy>=1.18.0", "pygame==2.1.0"],
-    classifiers=[
-        "Development Status :: 5 - Production/Stable",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
-        "Programming Language :: Python :: 3.9",
-        "Programming Language :: Python :: 3.10",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],
-    include_package_data=True,
     cmdclass={"build_ext": CMakeBuild},
 )
